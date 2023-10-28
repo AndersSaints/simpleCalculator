@@ -1,6 +1,5 @@
 # importing tkinter
 from tkinter import *
-import re
 
 # color definition
 color1 = "#3b3b3b" # black
