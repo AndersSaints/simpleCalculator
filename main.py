@@ -1,6 +1,5 @@
 # importing tkinter
 from tkinter import *
-from tkinter import ttk
 
 # color definition
 color1 = "#3b3b3b" # black
@@ -25,6 +24,8 @@ bodyFrame.grid(row=1, column=0)
 # init variable
 allValues = ""
 result = ""
+Operator = ""
+equalsFlag = 0
 textValue = StringVar()
 
 # functions
@@ -33,16 +34,28 @@ def displayValue(event):
     allValues = allValues + str(event)
     textValue.set(allValues)
 
+def setOperator():
+    ...
+
 def calculate():
-    global allValues, result
-    result = str(eval(allValues))
-    textValue.set(result)
-    allValues = result
+    if equalsFlag == 0:
+        global allValues, result, equalsFlag
+        result = str(eval(allValues))
+        equalsFlag = 1
+        textValue.set(result)
+        allValues = result
+    if equalsFlag == 1:
+        global allValues, result, equalsFlag, repeatOperation
+        result = str(eval(allValues))
+        textValue.set(result)
+        allValues = result
+
 
 def flush():
-    global allValues, result
+    global allValues, result, equalsFlag
     allValues = ""
     result = ""
+    equalsFlag = 0
     textValue.set(allValues)
 
 # label
@@ -90,9 +103,6 @@ b_17 = Button(bodyFrame, command= lambda:displayValue("."), text=".", width=5, h
 b_17.place(x=150, y=228)
 b_18 = Button(bodyFrame, command= lambda:calculate(), text="=", width=5, height=2, bg=color5, fg=color2, font=("Ivy 13 bold"), relief=RAISED, overrelief=RIDGE)
 b_18.place(x=220, y=228)
-
-
-
 
 window.mainloop()
 
