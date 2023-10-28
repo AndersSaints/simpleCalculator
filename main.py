@@ -1,5 +1,6 @@
 # importing tkinter
 from tkinter import *
+import re
 
 # color definition
 color1 = "#3b3b3b" # black
@@ -24,8 +25,6 @@ bodyFrame.grid(row=1, column=0)
 # init variable
 allValues = ""
 result = ""
-Operator = ""
-equalsFlag = 0
 textValue = StringVar()
 
 # functions
@@ -33,22 +32,12 @@ def displayValue(event):
     global allValues, result
     allValues = allValues + str(event)
     textValue.set(allValues)
-
-def setOperator():
-    ...
-
+  
 def calculate():
-    if equalsFlag == 0:
-        global allValues, result, equalsFlag
-        result = str(eval(allValues))
-        equalsFlag = 1
-        textValue.set(result)
-        allValues = result
-    if equalsFlag == 1:
-        global allValues, result, equalsFlag, repeatOperation
-        result = str(eval(allValues))
-        textValue.set(result)
-        allValues = result
+    global allValues, result
+    result = str(eval(allValues))
+    allValues = result
+    textValue.set(result)
 
 
 def flush():
